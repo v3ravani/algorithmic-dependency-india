@@ -2180,16 +2180,16 @@ in
     gap: 0.35rem;
   }
 
-  /* Document download & simulation mobile: strict 50 / 50 equal width on same line */
+  /* Document download & simulation mobile: strict 50 / 50 equal width with proper spacing */
   .pub-document-action-row {
     width: 100% !important;
     display: flex !important;
     flex-direction: row !important;
     flex-wrap: nowrap !important;
     justify-content: space-between !important;
-    align-items: stretch !important;
-    gap: 0.5rem !important;
-    margin: 1.5rem 0 1.25rem !important;
+    align-items: center !important;
+    gap: 0.65rem !important;
+    margin: 1.75rem 0 1.5rem !important;
     box-sizing: border-box !important;
   }
 
@@ -2198,32 +2198,31 @@ in
     flex: 1 1 0px !important;
     width: 0 !important;
     min-width: 0 !important;
-    max-width: calc(50% - 0.25rem) !important;
+    max-width: calc(50% - 0.325rem) !important;
+    height: 44px !important;
     min-height: 44px !important;
     display: inline-flex !important;
     flex-direction: row !important;
     flex-wrap: nowrap !important;
     justify-content: center !important;
     align-items: center !important;
-    padding: 0.65rem 0.2rem !important;
-    font-family: var(--font-mono) !important;
-    font-size: clamp(0.65rem, 2.8vw, 0.78125rem) !important;
+    padding: 0 0.5rem !important;
+    font-family: var(--font-mono, monospace) !important;
+    font-size: clamp(0.6875rem, 2.5vw, 0.75rem) !important;
     font-weight: 700 !important;
     letter-spacing: 0 !important;
     text-align: center !important;
     white-space: nowrap !important;
-    gap: 0.2rem !important;
+    gap: 0.35rem !important;
     box-sizing: border-box !important;
-    overflow: hidden !important;
+    text-decoration: none !important;
   }
 
-  .pub-pdf-download-btn span:first-child,
-  .pub-simulator-btn span:first-child {
+  .pub-pdf-download-btn span,
+  .pub-simulator-btn span {
     white-space: nowrap !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-    display: inline-block !important;
-    max-width: calc(100% - 14px) !important;
+    display: inline !important;
+    line-height: 1 !important;
   }
 
   .pub-pdf-download-btn .btn-arrow,
@@ -2231,7 +2230,7 @@ in
     flex-shrink: 0 !important;
     font-size: 0.75rem !important;
     line-height: 1 !important;
-    margin-left: 1px !important;
+    margin: 0 !important;
   }
 
   .toc-list {
@@ -2243,17 +2242,18 @@ in
 /* Extra small mobile screens (under 380px) */
 @media (max-width: 380px) {
   .pub-document-action-row {
-    gap: 0.35rem !important;
+    gap: 0.45rem !important;
+    margin: 1.5rem 0 1.25rem !important;
   }
 
   .pub-pdf-download-btn,
   .pub-simulator-btn {
-    max-width: calc(50% - 0.175rem) !important;
-    font-size: 0.625rem !important;
-    padding: 0.55rem 0.15rem !important;
-    gap: 0.15rem !important;
+    max-width: calc(50% - 0.225rem) !important;
+    font-size: 0.65rem !important;
+    padding: 0 0.35rem !important;
+    gap: 0.25rem !important;
+    height: 40px !important;
     min-height: 40px !important;
-    letter-spacing: -0.01em !important;
   }
 
   .pub-pdf-download-btn .btn-arrow,

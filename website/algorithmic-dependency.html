@@ -54,18 +54,22 @@
   <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
   
   <!-- Editorial Stylesheet -->
-  <link rel="stylesheet" href="algorithmic-dependency.css?v=2.1">
+  <link rel="stylesheet" href="algorithmic-dependency.css?v=2.2">
   <style>
     @media (max-width: 768px) {
+      .editorial-canvas {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+      }
       .pub-document-action-row {
         width: 100% !important;
         display: flex !important;
         flex-direction: row !important;
         flex-wrap: nowrap !important;
         justify-content: space-between !important;
-        align-items: stretch !important;
-        gap: 0.5rem !important;
-        margin: 1.5rem 0 1.25rem !important;
+        align-items: center !important;
+        gap: 0.65rem !important;
+        margin: 1.75rem 0 1.5rem !important;
         box-sizing: border-box !important;
       }
       .pub-pdf-download-btn,
@@ -73,31 +77,30 @@
         flex: 1 1 0px !important;
         width: 0 !important;
         min-width: 0 !important;
-        max-width: calc(50% - 0.25rem) !important;
+        max-width: calc(50% - 0.325rem) !important;
+        height: 44px !important;
         min-height: 44px !important;
         display: inline-flex !important;
         flex-direction: row !important;
         flex-wrap: nowrap !important;
         justify-content: center !important;
         align-items: center !important;
-        padding: 0.65rem 0.2rem !important;
+        padding: 0 0.5rem !important;
         font-family: var(--font-mono, monospace) !important;
-        font-size: clamp(0.65rem, 2.8vw, 0.78125rem) !important;
+        font-size: clamp(0.6875rem, 2.5vw, 0.75rem) !important;
         font-weight: 700 !important;
         letter-spacing: 0 !important;
         text-align: center !important;
         white-space: nowrap !important;
-        gap: 0.2rem !important;
+        gap: 0.35rem !important;
         box-sizing: border-box !important;
-        overflow: hidden !important;
+        text-decoration: none !important;
       }
-      .pub-pdf-download-btn span:first-child,
-      .pub-simulator-btn span:first-child {
+      .pub-pdf-download-btn span,
+      .pub-simulator-btn span {
         white-space: nowrap !important;
-        overflow: hidden !important;
-        text-overflow: ellipsis !important;
-        display: inline-block !important;
-        max-width: calc(100% - 14px) !important;
+        display: inline !important;
+        line-height: 1 !important;
       }
       .pub-pdf-download-btn .btn-arrow,
       .pub-simulator-btn .btn-arrow {
