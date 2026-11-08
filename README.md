@@ -42,3 +42,6 @@ This project is an independent research and analytical initiative. Figures and o
 ## Author
 
 Viraj Ravani
+
+- Email: [viraj.ravani@somaiya.edu](mailto:viraj.ravani@somaiya.edu)
+- LinkedIn: [linkedin.com/in/virajravani](https://www.linkedin.com/in/virajravani)
