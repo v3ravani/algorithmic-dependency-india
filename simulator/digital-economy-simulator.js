@@ -1038,6 +1038,12 @@
   // 12. Initialization
   // ---------------------------------------------------------------------------
   document.addEventListener('DOMContentLoaded', function () {
+    if (window.location.protocol === 'file:') {
+      document.querySelectorAll('[data-local-href]').forEach(el => {
+        const localHref = el.getAttribute('data-local-href');
+        if (localHref) el.setAttribute('href', localHref);
+      });
+    }
     setupEventListeners();
     syncInputsFromState();
     updateScenarioButtonStyles();

@@ -576,3 +576,17 @@ function initChartExtractionDist() {
     }
   });
 }
+
+/**
+ * Protocol-Aware Simulator Link Resolver:
+ * Ensures links work when opened directly via local file:// protocol or deployed online.
+ */
+document.addEventListener('DOMContentLoaded', () => {
+  if (window.location.protocol === 'file:') {
+    document.querySelectorAll('[data-local-href]').forEach(el => {
+      const localHref = el.getAttribute('data-local-href');
+      if (localHref) el.setAttribute('href', localHref);
+    });
+  }
+});
+
