@@ -1,0 +1,2226 @@
+/* ==========================================================================
+   THE ECONOMIC IMPACT OF ALGORITHMIC DEPENDENCY ON INDIA'S DOMESTIC MARKET
+   Independent Economic Research Publication Stylesheet
+   Design Language: Minimal Swiss Editorial / Financial Times Data Journalism
+   Author: Viraj Ravani (viraj.ravani@somaiya.edu)
+   File: ad-style.css
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Design Tokens & Typographic Hierarchy
+   -------------------------------------------------------------------------- */
+:root {
+  /* Editorial Color Palette */
+  --bg-page: #F7F6F1;
+  --bg-surface: #F0EEE7;
+  --bg-subtle: #EBE8E0;
+  --bg-table-hover: #EFECE4;
+
+  --text-primary: #25251F;
+  --text-secondary: #77736C;
+  --text-muted: #9C988F;
+  --text-light: #B5B1A6;
+
+  --accent-terracotta: #A64E35;
+  --accent-terracotta-subtle: #F6ECE9;
+  --accent-terracotta-border: #E8CAC1;
+
+  --accent-olive: #68775C;
+  --accent-olive-subtle: #EEF2EB;
+  --accent-olive-border: #CBD5C4;
+
+  --border-rule: #DEDAD0;
+  --border-dark: #25251F;
+
+  /* Matrix Heatmap Tints (Subtle, Academic, Restrained) */
+  --matrix-high-bg: #F7ECE8;
+  --matrix-high-text: #8C2E19;
+  --matrix-high-border: #E8CAC1;
+
+  --matrix-friction-bg: #F8F1E4;
+  --matrix-friction-text: #875708;
+  --matrix-friction-border: #EBDAB8;
+
+  --matrix-relief-bg: #EDF3ED;
+  --matrix-relief-text: #2C5E3B;
+  --matrix-relief-border: #CBDDCF;
+
+  --matrix-low-bg: #EFECE6;
+  --matrix-low-text: #595750;
+  --matrix-low-border: #DCD8CD;
+
+  /* Typography Stacks */
+  --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: 'IBM Plex Mono', 'JetBrains Mono', Consolas, monospace;
+
+  /* Layout Widths */
+  --max-width-page: 1160px;
+  --max-width-prose: 720px;
+}
+
+/* --------------------------------------------------------------------------
+   2. Base & Reset
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  padding: 0;
+}
+
+/* Links & Text Utilities */
+a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color 0.15s ease;
+}
+
+a:hover {
+  color: var(--accent-terracotta);
+}
+
+.text-terracotta {
+  color: var(--accent-terracotta) !important;
+}
+
+.text-olive {
+  color: var(--accent-olive) !important;
+}
+
+p {
+  margin-bottom: 1.4rem;
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+/* Citation markers: IBM Plex Mono bracket links */
+.cite-ref {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--accent-terracotta);
+  text-decoration: none;
+  padding: 0 0.15rem;
+  display: inline-block;
+  vertical-align: baseline;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.cite-ref:hover {
+  background-color: var(--accent-terracotta-subtle);
+  color: var(--accent-terracotta);
+  text-decoration: none;
+}
+
+/* Brand Chips in Header */
+.gatekeepers-flex {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.brand-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-rule);
+  padding: 0.18rem 0.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.brand-logo-img {
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+.logo-meta-blue {
+  filter: invert(34%) sepia(82%) saturate(4100%) hue-rotate(204deg) brightness(98%) contrast(106%);
+}
+
+/* Table Entity Badges */
+.table-entity-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.entity-logo-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.entity-mini-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-rule);
+  padding: 0.18rem 0.45rem;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.table-logo-img {
+  width: 13px;
+  height: 13px;
+  object-fit: contain;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+.matrix-mini-logo {
+  height: 12px;
+  width: auto;
+  object-fit: contain;
+  vertical-align: middle;
+  margin-right: 0.35rem;
+}
+
+.title-with-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.ondc-header-logo {
+  height: 18px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* --------------------------------------------------------------------------
+   3. Minimal Reading Progress & Back to Top
+   -------------------------------------------------------------------------- */
+.reading-progress-track {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: transparent;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.reading-progress-fill {
+  height: 100%;
+  width: 0%;
+  background-color: var(--accent-terracotta);
+  transition: width 0.08s linear;
+}
+
+.back-to-top-editorial {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: var(--bg-page);
+  border: 1px solid var(--border-rule);
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  padding: 0.45rem 0.65rem;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity 0.2s ease, transform 0.2s ease, border-color 0.15s ease, color 0.15s ease;
+  z-index: 900;
+}
+
+.back-to-top-editorial.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.back-to-top-editorial:hover {
+  border-color: var(--text-primary);
+  color: var(--text-primary);
+}
+
+.btt-arrow {
+  font-size: 0.8125rem;
+  line-height: 1;
+}
+
+/* Accessibility Skip Link */
+.skip-to-content-link {
+  position: absolute;
+  top: -100px;
+  left: 1.5rem;
+  background-color: var(--surface-card);
+  color: var(--accent-terracotta);
+  padding: 0.75rem 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  border: 1px solid var(--accent-terracotta);
+  z-index: 10001;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: top 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.skip-to-content-link:focus {
+  top: 1rem;
+  outline: 2px solid var(--accent-terracotta);
+  outline-offset: 2px;
+}
+
+/* Contextual Editorial Internal Linking */
+.editorial-internal-link {
+  color: var(--text-primary);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--accent-terracotta);
+  text-underline-offset: 3px;
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.editorial-internal-link:hover {
+  color: var(--accent-terracotta);
+  background-color: rgba(166, 78, 53, 0.06);
+}
+
+/* --------------------------------------------------------------------------
+   Research Directory / Academic Table of Contents
+   -------------------------------------------------------------------------- */
+.pub-table-of-contents {
+  margin: 2.5rem 0 4rem;
+  padding: 2rem 2.25rem;
+  background-color: #F0EDE6;
+  border-top: 2px solid var(--text-primary);
+  border-bottom: 1px solid var(--border-rule);
+}
+
+.toc-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.toc-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-terracotta);
+}
+
+.toc-meta-note {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.85rem 2.5rem;
+}
+
+.toc-list li a {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  text-decoration: none;
+  line-height: 1.45;
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.toc-num {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--accent-terracotta);
+  flex-shrink: 0;
+}
+
+.toc-list li a:hover {
+  color: var(--accent-terracotta);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transform: translateX(2px);
+}
+
+/* --------------------------------------------------------------------------
+   4. Main Canvas & Editorial Grid
+   -------------------------------------------------------------------------- */
+.editorial-canvas {
+  max-width: var(--max-width-page);
+  margin: 0 auto;
+  padding: 4.5rem 2.5rem 6.5rem;
+}
+
+.pub-section {
+  position: relative;
+  margin-bottom: 5.5rem;
+  padding-bottom: 4.5rem;
+  border-bottom: 1px solid var(--border-rule);
+  scroll-margin-top: 2.25rem;
+}
+
+.research-matrix-container {
+  scroll-margin-top: 2.25rem;
+}
+
+.pub-section:last-of-type {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+/* Numbered Section Header Identifier */
+.section-lead-marker {
+  display: flex;
+  align-items: baseline;
+  gap: 0.85rem;
+  margin-bottom: 0.75rem;
+}
+
+.section-numeral {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--accent-terracotta);
+  letter-spacing: 0.08em;
+}
+
+.section-title-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* Editorial Headlines */
+.editorial-heading {
+  font-family: var(--font-serif);
+  font-size: 2.35rem;
+  font-weight: 700;
+  line-height: 1.22;
+  color: var(--text-primary);
+  letter-spacing: -0.015em;
+  margin-bottom: 2rem;
+}
+
+.editorial-subheading {
+  font-family: var(--font-serif);
+  font-size: 1.625rem;
+  font-weight: 700;
+  line-height: 1.32;
+  color: var(--text-primary);
+  margin: 2.5rem 0 1.25rem;
+}
+
+.editorial-minor-title {
+  font-family: var(--font-sans);
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  margin: 2rem 0 1.25rem;
+}
+
+.section-lead-narrative {
+  font-size: 1.15rem;
+  line-height: 1.78;
+  color: var(--text-primary);
+  max-width: 980px;
+  margin-bottom: 2.5rem;
+}
+
+.section-subtext {
+  font-size: 1.0625rem;
+  color: var(--text-secondary);
+  margin-bottom: 1.75rem;
+}
+
+/* --------------------------------------------------------------------------
+   5. SECTION 1: Publication Header & Research Cover
+   -------------------------------------------------------------------------- */
+.pub-cover {
+  padding-bottom: 2rem;
+  margin-bottom: 0;
+  border-bottom: none;
+}
+
+.pub-metadata-topline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border-rule);
+  padding-bottom: 0.75rem;
+}
+
+.pub-classification {
+  color: var(--accent-terracotta);
+  font-weight: 700;
+}
+
+.pub-headline {
+  font-family: var(--font-serif);
+  font-size: 3.75rem;
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+  max-width: 1040px;
+}
+
+.pub-deck {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.45;
+  color: var(--text-secondary);
+  max-width: 900px;
+  margin-bottom: 2.75rem;
+}
+
+/* Metadata Strip: Minimal Editorial Grid */
+.pub-meta-matrix {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  padding: 1.25rem 0;
+  border-top: 1px solid var(--border-rule);
+  border-bottom: 1px solid var(--border-rule);
+  margin-bottom: 1.25rem;
+}
+
+.meta-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.meta-term {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: var(--text-muted);
+}
+
+.meta-desc {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.author-credits {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.author-social-link {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-rule);
+  padding: 0.1rem 0.35rem;
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+
+.author-social-link:hover {
+  background-color: var(--text-primary);
+  color: var(--bg-page);
+  border-color: var(--text-primary);
+}
+in
+/* Document Download & Simulation Action Buttons */
+.pub-document-action-row {
+  margin: 1.75rem 0 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.pub-pdf-download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background-color: var(--text-primary);
+  color: var(--bg-page);
+  padding: 0.65rem 1.15rem;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  border: 1px solid var(--text-primary);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.pub-pdf-download-btn:hover {
+  background-color: var(--accent-terracotta);
+  border-color: var(--accent-terracotta);
+  color: #FFFFFF;
+  text-decoration: none;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(166, 78, 53, 0.22);
+}
+
+.pub-simulator-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background-color: #FFFFFF;
+  color: var(--text-primary);
+  padding: 0.65rem 1.15rem;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  border: 1px solid var(--text-primary);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.pub-simulator-btn:hover {
+  background-color: var(--accent-terracotta);
+  border-color: var(--accent-terracotta);
+  color: #FFFFFF;
+  text-decoration: none;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(166, 78, 53, 0.22);
+}
+
+.pdf-icon-svg {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
+
+.btn-arrow {
+  font-size: 0.875rem;
+  line-height: 1;
+  transition: transform 0.15s ease;
+}
+
+.pub-pdf-download-btn:hover .btn-arrow,
+.pub-simulator-btn:hover .btn-arrow {
+  transform: translate(2px, -2px);
+}
+
+/* Section 08 Bio PDF link */
+.bio-pdf-link {
+  font-weight: 700 !important;
+  color: var(--accent-terracotta) !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.bio-pdf-link:hover {
+  color: var(--text-primary) !important;
+}
+
+.pub-disclaimer-note {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* --------------------------------------------------------------------------
+   6. SECTION 2: 01 / The Bridge Problem
+   -------------------------------------------------------------------------- */
+.editorial-lede-block {
+  margin-bottom: 2.5rem;
+}
+
+.lede-text {
+  font-size: 1.25rem;
+  line-height: 1.82;
+  color: var(--text-primary);
+  font-weight: 400;
+  max-width: 960px;
+}
+
+.editorial-text-duo {
+  display: grid;
+  grid-template-columns: 1.25fr 0.85fr;
+  gap: 3.5rem;
+  align-items: start;
+  margin-bottom: 3.5rem;
+}
+
+.text-body-left p {
+  font-size: 1.0625rem;
+  line-height: 1.75;
+}
+
+.editorial-pull-column {
+  border-left: 2px solid var(--accent-terracotta);
+  padding-left: 1.75rem;
+  margin-top: 0.5rem;
+}
+
+.editorial-pullquote {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-style: italic;
+  line-height: 1.55;
+  color: var(--text-primary);
+}
+
+.pullquote-cite {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-style: normal;
+  letter-spacing: 0.06em;
+  color: var(--text-secondary);
+  margin-top: 1rem;
+}
+
+/* Pillars: Three Editorial Columns */
+.pillars-editorial-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-rule);
+}
+
+.pillar-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.pillar-index {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--accent-terracotta);
+  line-height: 1;
+  margin-bottom: 0.85rem;
+}
+
+.pillar-headline {
+  font-family: var(--font-serif);
+  font-size: 1.1875rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.85rem;
+}
+
+.pillar-column p {
+  font-size: 0.9375rem;
+  line-height: 1.68;
+  color: var(--text-secondary);
+}
+
+/* --------------------------------------------------------------------------
+   7. SECTION 3: 02 / The Foreign Middleman Tax
+   -------------------------------------------------------------------------- */
+.editorial-narrative-split {
+  display: grid;
+  grid-template-columns: 1.15fr 0.95fr;
+  gap: 3.5rem;
+  align-items: start;
+  margin-bottom: 3.5rem;
+}
+
+.inline-metrics-ledger {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-rule);
+  border-bottom: 1px solid var(--border-rule);
+  padding-bottom: 1.5rem;
+}
+
+.ledger-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.ledger-num {
+  font-family: var(--font-mono);
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: var(--accent-terracotta);
+  line-height: 1.1;
+}
+
+.ledger-caption {
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--text-secondary);
+}
+
+/* Financial Times Style Integrated Figures */
+.editorial-figure {
+  margin: 0;
+  padding-top: 1rem;
+  border-top: 2px solid var(--text-primary);
+  display: flex;
+  flex-direction: column;
+}
+
+.figure-topline {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.fig-id {
+  font-weight: 700;
+  color: var(--accent-terracotta);
+}
+
+.figure-title {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--text-primary);
+  margin-bottom: 0.4rem;
+}
+
+.figure-sub {
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+.chart-embed {
+  position: relative;
+  width: 100%;
+}
+
+.chart-embed.doughnut-embed {
+  height: 250px;
+}
+
+.chart-embed.bar-embed {
+  height: 240px;
+}
+
+.chart-embed.stacked-embed {
+  height: 260px;
+}
+
+.chart-embed.donut-embed {
+  height: 260px;
+}
+
+.figure-legend-inline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1.25rem;
+  margin-top: 1rem;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.legend-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.capture-dot {
+  background-color: var(--accent-terracotta);
+}
+
+.retain-dot {
+  background-color: var(--accent-olive);
+}
+
+.charcoal-dot {
+  background-color: var(--text-secondary);
+}
+
+.figure-caption {
+  font-size: 0.75rem;
+  line-height: 1.45;
+  color: var(--text-muted);
+  margin-top: 0.85rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--border-rule);
+}
+
+/* Academic Research Tables */
+.editorial-table-block {
+  margin-top: 3.5rem;
+}
+
+.table-top-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.85rem;
+}
+
+.table-title {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.table-source-tag {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+
+.table-scroll-container {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.academic-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+  text-align: left;
+  border-top: 2px solid var(--text-primary);
+  border-bottom: 1px solid var(--text-primary);
+}
+
+.academic-table th {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  padding: 0.85rem 0.75rem;
+  border-bottom: 1px solid var(--border-rule);
+  background-color: var(--bg-surface);
+}
+
+.academic-table td {
+  padding: 0.95rem 0.75rem;
+  border-bottom: 1px solid var(--border-rule);
+  color: var(--text-primary);
+  vertical-align: middle;
+}
+
+.academic-table tr:hover td {
+  background-color: var(--bg-table-hover);
+}
+
+.data-num {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.875rem;
+}
+
+.table-footnote {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin-top: 0.85rem;
+  line-height: 1.5;
+}
+
+/* --------------------------------------------------------------------------
+   8. SECTION 4: 03 / Digital Extraction Mechanics
+   -------------------------------------------------------------------------- */
+.editorial-subsection {
+  margin: 3.5rem 0;
+}
+
+.sub-identifier {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--accent-terracotta);
+  text-transform: uppercase;
+  margin-bottom: 0.35rem;
+}
+
+.editorial-subdivider {
+  border: 0;
+  height: 1px;
+  background-color: var(--border-rule);
+  margin: 4.5rem 0;
+}
+
+.editorial-marginalia {
+  margin-top: 0.5rem;
+}
+
+.marginalia-box {
+  border-top: 1px solid var(--border-rule);
+  padding-top: 1rem;
+}
+
+.marginalia-kicker {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--text-secondary);
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+.marginalia-text {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.highlight-inline {
+  color: var(--accent-terracotta);
+  font-weight: 600;
+}
+
+/* Sequence List */
+.friction-sequence-list {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1.5rem;
+  border-top: 1px solid var(--border-rule);
+}
+
+.sequence-row {
+  display: flex;
+  gap: 1.5rem;
+  align-items: baseline;
+  padding: 1.15rem 0;
+  border-bottom: 1px solid var(--border-rule);
+}
+
+.seq-num {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--accent-terracotta);
+  flex-shrink: 0;
+  width: 24px;
+}
+
+.seq-body {
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: var(--text-primary);
+}
+
+.seq-body strong {
+  color: var(--text-primary);
+}
+
+/* Four Columns of Consumer Penalties */
+.consumer-penalty-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-rule);
+}
+
+.penalty-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.penalty-label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--accent-terracotta);
+  margin-bottom: 0.4rem;
+}
+
+.penalty-title {
+  font-family: var(--font-serif);
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.65rem;
+}
+
+.penalty-column p {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.interdependency-callout {
+  margin-top: 3.5rem;
+  padding: 1.75rem 2rem;
+  background-color: var(--bg-surface);
+  border-left: 3px solid var(--text-primary);
+}
+
+.callout-heading {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+}
+
+.interdependency-callout p {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin-bottom: 0;
+}
+
+/* --------------------------------------------------------------------------
+   9. SECTION 5: 04 / Macroeconomic Drainage
+   -------------------------------------------------------------------------- */
+
+/* A. Systemic Capital Flight Equation */
+.math-research-block {
+  margin: 3rem 0;
+  padding: 2.25rem 0;
+  border-top: 2px solid var(--text-primary);
+  border-bottom: 1px solid var(--border-rule);
+}
+
+.math-meta-header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  color: var(--text-secondary);
+  margin-bottom: 1.75rem;
+}
+
+.math-equation-id {
+  font-weight: 700;
+  color: var(--accent-terracotta);
+}
+
+.math-layout-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 1.25rem;
+  margin-bottom: 2.5rem;
+}
+
+.math-lhs-part {
+  font-family: var(--font-serif);
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.2;
+  padding-top: 0.25rem;
+}
+
+.math-equal-symbol,
+.math-plus-symbol {
+  font-family: var(--font-mono);
+  font-size: 1.65rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: 1.2;
+}
+
+.math-terms-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 1.25rem;
+}
+
+.math-term-unit {
+  display: flex;
+  flex-direction: column;
+}
+
+.term-expression {
+  font-family: var(--font-mono);
+  font-size: 1.45rem;
+  font-weight: 600;
+  color: var(--accent-terracotta);
+  line-height: 1.2;
+}
+
+.term-expression var {
+  font-style: italic;
+}
+
+.term-expression sub {
+  font-size: 0.8125rem;
+}
+
+.term-sub-desc {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin-top: 0.45rem;
+  letter-spacing: 0.02em;
+}
+
+/* Two-Column Equation Variable Definitions */
+.math-variables-definition {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem 3rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--border-rule);
+}
+
+.var-def-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.85rem;
+}
+
+.var-name {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--accent-terracotta);
+  flex-shrink: 0;
+  width: 42px;
+}
+
+.var-text {
+  font-size: 0.8125rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+/* Monumental Editorial Statistic: ₹60,000+ Crore */
+.macro-central-statistic-block {
+  display: grid;
+  grid-template-columns: 0.95fr 1.25fr;
+  gap: 4rem;
+  align-items: center;
+  margin: 4.5rem 0;
+  padding: 3rem 0;
+  border-top: 1px solid var(--border-rule);
+  border-bottom: 1px solid var(--border-rule);
+}
+
+.stat-editorial-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--accent-terracotta);
+  margin-bottom: 0.5rem;
+}
+
+.stat-monumental-number {
+  font-family: var(--font-serif);
+  font-size: 4.5rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+  margin-bottom: 0.35rem;
+}
+
+.stat-unit-tag {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.stat-range-label {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+.stat-right-title {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.85rem;
+}
+
+.stat-right-prose {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.stat-breakdown-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.stat-breakdown-list li {
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+  padding-left: 1rem;
+  position: relative;
+}
+
+.stat-breakdown-list li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--accent-terracotta);
+}
+
+.stat-breakdown-list code {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--accent-terracotta);
+}
+
+/* C. Extraction Heatmap (Academic Research Matrix) */
+.research-matrix-container {
+  margin-top: 4.5rem;
+}
+
+.matrix-title-group {
+  margin-bottom: 1.5rem;
+}
+
+.matrix-kicker {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--accent-terracotta);
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+.matrix-heading {
+  font-family: var(--font-serif);
+  font-size: 1.625rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.4rem;
+}
+
+.matrix-sub {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  max-width: 800px;
+}
+
+/* Minimal Text-Based Segmented Filters */
+.matrix-minimal-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 1.25rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-rule);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+.filters-prefix {
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.matrix-tab-btn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0.2rem 0;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 500;
+  position: relative;
+  transition: color 0.15s ease;
+}
+
+.matrix-tab-btn:hover {
+  color: var(--text-primary);
+}
+
+.matrix-tab-btn.active {
+  color: var(--text-primary);
+  font-weight: 700;
+  border-bottom: 2px solid var(--accent-terracotta);
+}
+
+/* Academic Heatmap Table */
+.matrix-scroll-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.academic-heatmap-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+  border-top: 2px solid var(--text-primary);
+  border-bottom: 1px solid var(--text-primary);
+}
+
+.academic-heatmap-table th {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  padding: 0.85rem 0.6rem;
+  border-bottom: 1px solid var(--border-rule);
+  background-color: var(--bg-surface);
+  text-align: center;
+}
+
+.academic-heatmap-table th.th-business {
+  text-align: left;
+  padding-left: 0.75rem;
+}
+
+.academic-heatmap-table th.row-business-name {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-align: left;
+  padding: 0.85rem 0.75rem;
+  border-bottom: 1px solid var(--border-rule);
+  white-space: nowrap;
+}
+
+.matrix-cell {
+  text-align: center;
+  padding: 0.85rem 0.5rem;
+  border: 1px solid var(--border-rule);
+  cursor: pointer;
+  outline: none;
+  transition: filter 0.15s ease, opacity 0.15s ease;
+}
+
+.matrix-cell:hover,
+.matrix-cell:focus {
+  filter: brightness(0.95);
+  box-shadow: inset 0 0 0 1px var(--text-primary);
+}
+
+.matrix-cell.dimmed {
+  opacity: 0.2;
+}
+
+.cell-text {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+/* Matrix cell subtle academic tints */
+.cell-high {
+  background-color: var(--matrix-high-bg);
+  color: var(--matrix-high-text);
+  border-color: var(--matrix-high-border);
+}
+
+.cell-friction {
+  background-color: var(--matrix-friction-bg);
+  color: var(--matrix-friction-text);
+  border-color: var(--matrix-friction-border);
+}
+
+.cell-relief {
+  background-color: var(--matrix-relief-bg);
+  color: var(--matrix-relief-text);
+  border-color: var(--matrix-relief-border);
+}
+
+.cell-low {
+  background-color: var(--matrix-low-bg);
+  color: var(--matrix-low-text);
+  border-color: var(--matrix-low-border);
+}
+
+/* Inline Dynamic Matrix Detail Note */
+.matrix-detail-inline {
+  margin-top: 1.5rem;
+  padding: 1.25rem 1.5rem;
+  background-color: var(--bg-surface);
+  border-left: 3px solid var(--accent-terracotta);
+}
+
+.detail-topline {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.detail-badge-pill {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--accent-terracotta);
+}
+
+.detail-sector-title {
+  font-family: var(--font-serif);
+  font-size: 1.0625rem;
+  color: var(--text-primary);
+  flex-grow: 1;
+}
+
+.detail-dismiss-btn {
+  background: none;
+  border: none;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.detail-dismiss-btn:hover {
+  color: var(--text-primary);
+}
+
+.detail-narrative {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin-bottom: 0;
+}
+
+/* Unobtrusive Matrix Academic Legend */
+.matrix-academic-legend {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.85rem 2rem;
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border-rule);
+}
+
+.legend-unit {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  font-size: 0.75rem;
+  line-height: 1.45;
+  color: var(--text-secondary);
+}
+
+.legend-swatch {
+  width: 10px;
+  height: 10px;
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+  border: 1px solid rgba(0,0,0,0.1);
+}
+
+.swatch-high { background-color: var(--matrix-high-bg); border-color: var(--matrix-high-border); }
+.swatch-friction { background-color: var(--matrix-friction-bg); border-color: var(--matrix-friction-border); }
+.swatch-relief { background-color: var(--matrix-relief-bg); border-color: var(--matrix-relief-border); }
+.swatch-low { background-color: var(--matrix-low-bg); border-color: var(--matrix-low-border); }
+
+/* --------------------------------------------------------------------------
+   10. SECTION 6: 05 / Restoring Sovereignty
+   -------------------------------------------------------------------------- */
+.sovereignty-columns-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+  margin: 3rem 0;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-rule);
+}
+
+.sovereign-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.sov-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--accent-olive);
+  margin-bottom: 0.45rem;
+}
+
+.sov-title {
+  font-family: var(--font-serif);
+  font-size: 1.1875rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.85rem;
+}
+
+.sovereign-col p {
+  font-size: 0.9375rem;
+  line-height: 1.68;
+  color: var(--text-secondary);
+}
+
+/* ONDC Split: Table & Figure 2.1 */
+.ondc-research-split {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 3.5rem;
+  align-items: start;
+  margin: 4.5rem 0;
+}
+
+/* Deliverables: 4 Columns */
+.deliverables-editorial-section {
+  margin: 4.5rem 0;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-rule);
+}
+
+.deliverables-section-heading {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 2rem;
+}
+
+.deliverables-four-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+.deliv-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.deliv-num {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--accent-olive);
+  margin-bottom: 0.5rem;
+}
+
+.deliv-title {
+  font-family: var(--font-serif);
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.65rem;
+}
+
+.deliv-col p {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.closing-prose-block {
+  margin-top: 3.5rem;
+  padding: 1.75rem 2rem;
+  background-color: var(--bg-surface);
+  border-left: 3px solid var(--accent-olive);
+}
+
+.closing-prose-block p {
+  font-size: 0.9375rem;
+  line-height: 1.75;
+  color: var(--text-primary);
+  margin-bottom: 0;
+}
+
+/* --------------------------------------------------------------------------
+   11. SECTION 7: 06 / The DPI Framework
+   -------------------------------------------------------------------------- */
+.paradigm-table th.th-walled {
+  color: var(--accent-terracotta);
+}
+
+.paradigm-table th.th-open {
+  color: var(--accent-olive);
+}
+
+.paradigm-table th.th-outcome {
+  color: var(--text-primary);
+}
+
+.paradigm-table td {
+  padding: 1.15rem 0.85rem;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+.dim-col-title {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+}
+
+/* Dual Figure Row */
+.dual-figure-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3.5rem;
+  margin-top: 4.5rem;
+}
+
+/* --------------------------------------------------------------------------
+   12. SECTION 8: 07 / The DPI Roadmap
+   -------------------------------------------------------------------------- */
+.editorial-narrative-prose {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  max-width: 960px;
+  margin-bottom: 3.5rem;
+}
+
+.dpi-sectors-editorial-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+  margin-bottom: 4.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-rule);
+}
+
+.sector-unit {
+  display: flex;
+  flex-direction: column;
+}
+
+.sector-id-tag {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--accent-terracotta);
+  margin-bottom: 0.45rem;
+}
+
+.sector-name {
+  font-family: var(--font-serif);
+  font-size: 1.1875rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+}
+
+.sector-unit p {
+  font-size: 0.875rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+
+/* Monumental Closing Pullquote */
+.monumental-quote-section {
+  margin: 5rem 0 3rem;
+  text-align: center;
+}
+
+.monumental-rule {
+  border: 0;
+  height: 2px;
+  background-color: var(--text-primary);
+  max-width: 140px;
+  margin: 0 auto;
+}
+
+.monumental-pullquote {
+  font-family: var(--font-serif);
+  font-size: 2.75rem;
+  font-weight: 800;
+  line-height: 1.25;
+  color: var(--text-primary);
+  letter-spacing: -0.025em;
+  margin: 2.5rem auto 1.5rem;
+  max-width: 880px;
+}
+
+.monumental-subtext {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--accent-terracotta);
+  margin-bottom: 2.5rem;
+}
+
+/* --------------------------------------------------------------------------
+   13. SECTION 9: 08 / References, Authorship & Disclaimer
+   -------------------------------------------------------------------------- */
+.citations-catalog-block {
+  margin-bottom: 4rem;
+}
+
+.catalog-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-bottom: 0.85rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-rule);
+}
+
+.catalog-title {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.catalog-search-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+.search-label {
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.catalog-search-wrap input {
+  padding: 0.35rem 0.65rem;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  background-color: transparent;
+  border: 1px solid var(--border-rule);
+  color: var(--text-primary);
+  outline: none;
+  min-width: 240px;
+  transition: border-color 0.15s ease;
+}
+
+.catalog-search-wrap input:focus {
+  border-color: var(--text-primary);
+}
+
+.catalog-instructions {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+}
+
+.catalog-instructions code {
+  font-family: var(--font-mono);
+  color: var(--accent-terracotta);
+}
+
+/* Academic References List */
+.academic-references-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--border-rule);
+}
+
+.ref-entry {
+  display: flex;
+  align-items: baseline;
+  gap: 1.25rem;
+  padding: 1.15rem 0;
+  border-bottom: 1px solid var(--border-rule);
+  transition: background-color 0.15s ease;
+}
+
+.ref-entry.highlighted {
+  background-color: var(--accent-terracotta-subtle);
+  animation: refHighlightFlash 2.5s ease-out;
+}
+
+@keyframes refHighlightFlash {
+  0% { background-color: rgba(166, 78, 53, 0.25); }
+  100% { background-color: transparent; }
+}
+
+.ref-bracket {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--accent-terracotta);
+  flex-shrink: 0;
+  width: 32px;
+}
+
+.ref-content {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--text-primary);
+}
+
+.ref-org {
+  font-weight: 700;
+}
+
+.ref-doc {
+  font-style: italic;
+  margin: 0 0.2rem;
+}
+
+.ref-verification {
+  display: block;
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  margin-top: 0.25rem;
+}
+
+/* Authorship Section */
+.authorship-editorial-strip {
+  display: grid;
+  grid-template-columns: 0.85fr 1.35fr;
+  gap: 3rem;
+  padding: 2.5rem 0;
+  border-top: 1px solid var(--border-rule);
+  border-bottom: 1px solid var(--border-rule);
+  margin-bottom: 3rem;
+}
+
+.author-term {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--accent-terracotta);
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+.author-display-name {
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.author-bio-cell p {
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+.author-links-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.bio-link {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.bio-link:hover {
+  color: var(--accent-terracotta);
+}
+
+/* Analytical Disclaimer */
+.disclaimer-academic-block {
+  padding: 1.5rem 0 2rem;
+  margin-bottom: 1rem;
+}
+
+.disclaimer-title {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 0.6rem;
+}
+
+.disclaimer-academic-block p {
+  font-size: 0.8125rem;
+  line-height: 1.65;
+  color: var(--text-muted);
+  margin-bottom: 0;
+}
+
+/* --------------------------------------------------------------------------
+   14. Responsive Layout & Refinements
+   -------------------------------------------------------------------------- */
+
+/* Tablet (max-width: 1024px) */
+@media (max-width: 1024px) {
+  .editorial-canvas {
+    padding-left: 1.75rem;
+    padding-right: 1.75rem;
+  }
+
+  .pub-headline {
+    font-size: 2.85rem;
+  }
+
+  .pub-meta-matrix {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .editorial-text-duo,
+  .editorial-narrative-split,
+  .ondc-research-split,
+  .dual-figure-row,
+  .macro-central-statistic-block,
+  .authorship-editorial-strip {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .editorial-pull-column {
+    border-left: none;
+    border-top: 2px solid var(--accent-terracotta);
+    padding-left: 0;
+    padding-top: 1rem;
+  }
+
+  .pillars-editorial-grid,
+  .sovereignty-columns-grid,
+  .dpi-sectors-editorial-row {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .consumer-penalty-grid,
+  .deliverables-four-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .math-variables-definition {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+/* Mobile (max-width: 768px) */
+@media (max-width: 768px) {
+  .editorial-canvas {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .pub-headline {
+    font-size: 2.15rem;
+  }
+
+  .pub-deck {
+    font-size: 1.2rem;
+  }
+
+  .editorial-heading {
+    font-size: 1.85rem;
+  }
+
+  .editorial-subheading {
+    font-size: 1.35rem;
+  }
+
+  .pub-meta-matrix {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .inline-metrics-ledger {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .consumer-penalty-grid,
+  .deliverables-four-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .math-layout-row {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .math-terms-group {
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .term-expression {
+    font-size: 1.15rem;
+  }
+
+  .stat-monumental-number {
+    font-size: 3.25rem;
+  }
+
+  .matrix-academic-legend {
+    grid-template-columns: 1fr;
+  }
+
+  .monumental-pullquote {
+    font-size: 1.85rem;
+  }
+
+  /* Research Table of Contents Mobile */
+  .pub-table-of-contents {
+    padding: 1.5rem 1.25rem;
+    margin: 2rem 0 2.75rem;
+  }
+
+  .toc-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+  }
+
+  /* Document download & simulation mobile: strict 50 / 50 side-by-side on same line */
+  .pub-document-action-row {
+    width: 100% !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0.5rem !important;
+    margin: 1.5rem 0 1.25rem !important;
+  }
+
+  .pub-pdf-download-btn,
+  .pub-simulator-btn {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 0.7rem 0.35rem !important;
+    font-size: 0.75rem !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    gap: 0.35rem !important;
+    box-sizing: border-box !important;
+  }
+
+  .toc-list {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+}
+
+/* Extra small mobile screens (under 380px) */
+@media (max-width: 380px) {
+  .pub-document-action-row {
+    gap: 0.35rem !important;
+  }
+
+  .pub-pdf-download-btn,
+  .pub-simulator-btn {
+    font-size: 0.6875rem !important;
+    padding: 0.6rem 0.25rem !important;
+    gap: 0.25rem !important;
+  }
+}

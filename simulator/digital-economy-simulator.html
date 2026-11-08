@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO Metadata -->
+  <title>India Digital Economy Simulator | Economic Impact of Algorithmic Dependency</title>
+  <meta name="description" content="Explore how foreign digital platform dependency, digital advertising expenditure, app store commissions, and domestic retention affect India's digital economy.">
+  <meta name="author" content="Viraj Ravani">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#F7F6F1">
+  
+  <!-- Canonical Deployment URL -->
+  <link rel="canonical" href="https://virajravani.in/digital-economy-simulator">
+  
+  <!-- Open Graph / Social Metadata -->
+  <meta property="og:site_name" content="Viraj Ravani">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="India Digital Economy Simulator | Economic Impact of Algorithmic Dependency">
+  <meta property="og:description" content="Interactive economic research simulation modeling the flow of digital advertising expenditure, app store commissions, and domestic capital retention in India.">
+  <meta property="og:url" content="https://virajravani.in/digital-economy-simulator">
+  <meta property="og:locale" content="en_IN">
+  <meta property="og:image" content="https://raw.githubusercontent.com/ONDC-Official/biap-app-ui-front/master/src/assets/images/AppLogo.png">
+  <meta property="og:image:alt" content="India Digital Economy Simulator Research Model">
+
+  <!-- Twitter / X Metadata -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="India Digital Economy Simulator | Economic Impact of Algorithmic Dependency">
+  <meta name="twitter:description" content="Interactive economic research simulation modeling the flow of digital advertising expenditure, app store commissions, and domestic capital retention in India.">
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/ONDC-Official/biap-app-ui-front/master/src/assets/images/AppLogo.png">
+
+  <!-- Typography Preconnects & Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+  
+  <!-- Editorial Dashboard Stylesheet -->
+  <link rel="stylesheet" href="digital-economy-simulator.css">
+</head>
+<body>
+
+  <!-- ====================================================================
+       DASHBOARD ROOT LAYOUT (Left Sidebar Fixed, Right Content Scrolls)
+       ==================================================================== -->
+  <div class="dashboard-root" id="dashboardRoot">
+
+    <!-- ==================================================================
+         LEFT SIDEBAR: Branding, Presets, Model Parameters & Actions
+         ================================================================== -->
+    <aside class="dashboard-sidebar" id="dashboardSidebar" aria-label="Model Parameters and Controls">
+      
+      <!-- Sidebar Header & Paper Link -->
+      <div class="sidebar-header">
+        <div class="sidebar-topline">
+          <span class="sidebar-badge">RESEARCH INSTRUMENT</span>
+          <a href="https://virajravani.in/algorithmic-dependency" class="sidebar-back-link" title="Read the original white paper publication">
+            &larr; White Paper
+          </a>
+        </div>
+        <h1 class="sidebar-title">India Digital Economy Simulator</h1>
+        <p class="sidebar-subtitle">Algorithmic Dependency &amp; Capital Retention</p>
+      </div>
+
+      <!-- Mobile Toggle for Drawer/Accordion on Mobile Devices -->
+      <button id="mobileSidebarToggle" class="mobile-toggle-btn" type="button" aria-expanded="false" aria-controls="sidebarScrollArea">
+        <span class="toggle-icon">&equiv;</span>
+        <span class="toggle-text">Model Parameters &amp; Assumptions</span>
+        <span class="toggle-chevron">&darr;</span>
+      </button>
+
+      <!-- Scrollable Controls Container inside Sidebar -->
+      <div class="sidebar-scroll-area" id="sidebarScrollArea">
+        
+        <!-- Scenario Presets Bar -->
+        <div class="sidebar-section-group">
+          <div class="sidebar-group-header">
+            <span class="sidebar-group-title">ARCHITECTURAL PRESETS</span>
+          </div>
+          <div class="sidebar-preset-pills">
+            <button class="btn-scenario btn-sidebar-preset active" data-scenario="custom" type="button" id="presetCustom">Baseline</button>
+            <button class="btn-scenario btn-sidebar-preset" data-scenario="high" type="button" id="presetHigh">A &bull; High Foreign</button>
+            <button class="btn-scenario btn-sidebar-preset" data-scenario="hybrid" type="button" id="presetHybrid">B &bull; Hybrid</button>
+            <button class="btn-scenario btn-sidebar-preset" data-scenario="domestic" type="button" id="presetDomestic">C &bull; Domestic</button>
+          </div>
+        </div>
+
+        <!-- Section 2: Primary Macroeconomic Model Inputs -->
+        <div class="sidebar-section-group" id="model-inputs">
+          <div class="sidebar-group-header">
+            <span class="sidebar-group-title">MODEL PARAMETERS</span>
+            <span class="sidebar-group-tag">ILLUSTRATIVE ASSUMPTIONS</span>
+          </div>
+
+          <div class="sidebar-inputs-list">
+
+            <!-- Input 1: Total Ad Spend -->
+            <div class="sidebar-input-item">
+              <div class="sidebar-input-head">
+                <label for="adSpendSlider" class="sidebar-label">1. Annual Digital Ad Spend</label>
+                <div class="sidebar-num-wrap">
+                  <span class="num-prefix">₹</span>
+                  <input type="number" id="adSpendInput" class="num-input sidebar-num-field" min="5000" max="200000" step="1000" value="60000" aria-label="Annual digital advertising expenditure in India in crore rupees">
+                  <span class="num-suffix">Cr</span>
+                </div>
+              </div>
+              <input type="range" id="adSpendSlider" class="sim-slider" min="5000" max="200000" step="1000" value="60000" aria-label="Slider for annual digital advertising expenditure">
+              <div class="sidebar-slider-bounds">
+                <span>₹5,000 Cr</span>
+                <span>₹2,00,000 Cr</span>
+              </div>
+            </div>
+
+            <!-- Input 2: Foreign Capture % -->
+            <div class="sidebar-input-item">
+              <div class="sidebar-input-head">
+                <label for="foreignCaptureSlider" class="sidebar-label">2. Foreign Platform Capture</label>
+                <div class="sidebar-num-wrap">
+                  <input type="number" id="foreignCaptureInput" class="num-input sidebar-num-field" min="0" max="100" step="1" value="72" aria-label="Foreign platform revenue capture percentage">
+                  <span class="num-suffix">%</span>
+                </div>
+              </div>
+              <input type="range" id="foreignCaptureSlider" class="sim-slider" min="0" max="100" step="1" value="72" aria-label="Slider for foreign platform revenue capture percentage">
+              <div class="sidebar-slider-bounds">
+                <span>0%</span>
+                <span class="text-terracotta">Alphabet &bull; Meta share</span>
+                <span>100%</span>
+              </div>
+            </div>
+
+            <!-- Input 3: Domestic Retention % -->
+            <div class="sidebar-input-item">
+              <div class="sidebar-input-head">
+                <label for="domesticRetentionSlider" class="sidebar-label">3. Domestic Retention</label>
+                <div class="sidebar-num-wrap">
+                  <input type="number" id="domesticRetentionInput" class="num-input sidebar-num-field" min="0" max="100" step="1" value="18" aria-label="Domestic platform revenue retention percentage">
+                  <span class="num-suffix">%</span>
+                </div>
+              </div>
+              <input type="range" id="domesticRetentionSlider" class="sim-slider" min="0" max="100" step="1" value="18" aria-label="Slider for domestic platform revenue retention percentage">
+              <div class="sidebar-slider-bounds">
+                <span>0%</span>
+                <span class="text-olive">Indian publishers</span>
+                <span>100%</span>
+              </div>
+            </div>
+
+            <!-- Input 4: App Store Commission % -->
+            <div class="sidebar-input-item">
+              <div class="sidebar-input-head">
+                <label for="appStoreCommissionSlider" class="sidebar-label">4. App Store Commission Rate</label>
+                <div class="sidebar-num-wrap">
+                  <input type="number" id="appStoreCommissionInput" class="num-input sidebar-num-field" min="0" max="30" step="1" value="20" aria-label="App store commission percentage">
+                  <span class="num-suffix">%</span>
+                </div>
+              </div>
+              <input type="range" id="appStoreCommissionSlider" class="sim-slider" min="0" max="30" step="1" value="20" aria-label="Slider for app store commission percentage">
+              <div class="sidebar-slider-bounds">
+                <span>0%</span>
+                <span>Gatekeeper take-rate</span>
+                <span>30%</span>
+              </div>
+            </div>
+
+            <!-- Input 5: App Store GMV -->
+            <div class="sidebar-input-item">
+              <div class="sidebar-input-head">
+                <label for="appStoreGMVSlider" class="sidebar-label">5. App Store Annual GMV</label>
+                <div class="sidebar-num-wrap">
+                  <span class="num-prefix">₹</span>
+                  <input type="number" id="appStoreGMVInput" class="num-input sidebar-num-field" min="2000" max="100000" step="1000" value="25000" aria-label="Annual app store transaction value in crore rupees">
+                  <span class="num-suffix">Cr</span>
+                </div>
+              </div>
+              <input type="range" id="appStoreGMVSlider" class="sim-slider" min="2000" max="100000" step="1000" value="25000" aria-label="Slider for annual app store transaction value">
+              <div class="sidebar-slider-bounds">
+                <span>₹2,000 Cr</span>
+                <span>Paid apps &amp; IAP</span>
+                <span>₹1,00,000 Cr</span>
+              </div>
+            </div>
+
+            <!-- Input 6: SME Digital Ad Outlay -->
+            <div class="sidebar-input-item">
+              <div class="sidebar-input-head">
+                <label for="smeAdSpendSlider" class="sidebar-label">6. SME Share of Ad Spend</label>
+                <div class="sidebar-num-wrap">
+                  <span class="num-prefix">₹</span>
+                  <input type="number" id="smeAdSpendInput" class="num-input sidebar-num-field" min="0" max="100000" step="1000" value="24000" aria-label="SME share of annual digital advertising expenditure in crore rupees">
+                  <span class="num-suffix">Cr</span>
+                </div>
+              </div>
+              <input type="range" id="smeAdSpendSlider" class="sim-slider" min="0" max="100000" step="1000" value="24000" aria-label="Slider for SME share of annual digital advertising expenditure">
+              <div class="sidebar-slider-bounds">
+                <span>₹0 Cr</span>
+                <span>Estimated 40%</span>
+                <span>₹1,00,000 Cr</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Dynamic Input Validation Banner -->
+          <div id="validationBanner" class="validation-alert-banner" role="alert"></div>
+        </div>
+
+        <!-- Sidebar Global Action Buttons -->
+        <div class="sidebar-actions-group">
+          <button id="btnRestoreDefaults" class="btn-sidebar-action" type="button" aria-label="Restore default illustrative baseline values">
+            <span>&circlearrowleft;</span> Restore Baseline Defaults
+          </button>
+          <button id="btnExportCSV" class="btn-sidebar-action btn-sidebar-primary" type="button" aria-label="Export current simulation data as CSV">
+            <span>&darr;</span> Export Simulation CSV
+          </button>
+        </div>
+
+        <!-- Section Navigation Shortcuts -->
+        <div class="sidebar-section-group">
+          <div class="sidebar-group-header">
+            <span class="sidebar-group-title">DASHBOARD NAVIGATION</span>
+          </div>
+          <nav class="sidebar-nav-list" aria-label="Dashboard Panels">
+            <a href="#live-outputs" class="sidebar-nav-link active">01 Live Calculations</a>
+            <a href="#visual-breakdown" class="sidebar-nav-link">02 Visual Economic Flows</a>
+            <a href="#scenario-comparison" class="sidebar-nav-link">03 Scenario Comparison</a>
+            <a href="#sme-explorer" class="sidebar-nav-link">04 SME Impact Explorer</a>
+            <a href="#sensitivity-analysis" class="sidebar-nav-link">05 Sensitivity Matrix</a>
+            <a href="#methodology-limitations" class="sidebar-nav-link">06 Methodology &amp; Caveats</a>
+          </nav>
+        </div>
+
+        <!-- Mobile Drawer Close Button -->
+        <button id="mobileSidebarClose" class="mobile-close-btn" type="button">
+          &check; Apply &amp; Close Controls
+        </button>
+
+        <!-- Sidebar Footer Methodology Disclaimer -->
+        <div class="sidebar-footer-note">
+          <strong>Methodology Note:</strong> This is an assumption-driven economic simulation. Results are mathematical estimates based on user-defined parameters, not audited national statistics.
+        </div>
+
+      </div>
+    </aside>
+
+    <!-- ==================================================================
+         RIGHT MAIN DASHBOARD (SCROLLABLE VIEWPORT)
+         ================================================================== -->
+    <main class="dashboard-main" id="dashboardMain">
+      <div class="dashboard-content-wrap">
+
+        <!-- Top Status Bar & Quick Jump Pills -->
+        <header class="dashboard-topbar">
+          <div class="topbar-status-cluster">
+            <span class="topbar-pulse-dot"></span>
+            <span class="topbar-status-label">ACTIVE MODEL:</span>
+            <span class="topbar-status-val" id="topbarActiveScenarioName">Baseline Illustrative Model</span>
+          </div>
+          <div class="topbar-chips-cluster">
+            <div class="topbar-chip">
+              <span class="chip-kicker">AD SPEND</span>
+              <span class="chip-val" id="topbarAdSpend">₹60,000 Cr</span>
+            </div>
+            <div class="topbar-chip">
+              <span class="chip-kicker">FOREIGN CAPTURE</span>
+              <span class="chip-val text-terracotta" id="topbarForeignPct">72%</span>
+            </div>
+            <div class="topbar-chip">
+              <span class="chip-kicker">DOMESTIC RETENTION</span>
+              <span class="chip-val text-olive" id="topbarDomesticPct">18%</span>
+            </div>
+            <div class="topbar-chip topbar-chip-highlight">
+              <span class="chip-kicker">COMBINED GROSS OUTFLOW</span>
+              <span class="chip-val" id="topbarCombinedOutflow">₹48,200 Cr</span>
+            </div>
+          </div>
+        </header>
+
+        <!-- Quick Jump Anchor Pills -->
+        <nav class="dashboard-jump-bar" aria-label="Jump to Section">
+          <span class="jump-bar-label">JUMP:</span>
+          <a href="#live-outputs" class="jump-pill">Live Outputs</a>
+          <a href="#visual-breakdown" class="jump-pill">Visual Flows</a>
+          <a href="#scenario-comparison" class="jump-pill">Scenarios</a>
+          <a href="#sme-explorer" class="jump-pill">SME Explorer</a>
+          <a href="#sensitivity-analysis" class="jump-pill">Sensitivity</a>
+          <a href="#methodology-limitations" class="jump-pill">Methodology</a>
+        </nav>
+
+        <!-- ==============================================================
+             PANEL 1: Live Economic Calculations (Outputs)
+             ============================================================== -->
+        <section id="live-outputs" class="dashboard-panel">
+          <div class="panel-header-row">
+            <div>
+              <span class="panel-kicker">01 &bull; MACROECONOMIC DERIVATIONS</span>
+              <h2 class="panel-heading">Live Modelled Economic Outputs</h2>
+            </div>
+            <span class="panel-badge">REAL-TIME RECALCULATION</span>
+          </div>
+          <p class="panel-intro">
+            Calculated dynamically from the user-defined assumptions in the left panel. Modelled platform outflow reflects gross economic flows across digital gatekeepers, not a direct measure of net national income loss.
+          </p>
+
+          <!-- Hero Highlight Card: Combined Platform Outflow -->
+          <div class="hero-metric-card">
+            <div class="hero-metric-content">
+              <span class="hero-kicker">COMBINED MODELLED PLATFORM-RELATED GROSS OUTFLOW</span>
+              <div class="hero-val-display" id="dispCombinedOutflow">₹48,200 Cr</div>
+              <p class="hero-explanation">
+                Synthesized gross commercial volume flowing through foreign advertising networks (₹43,200 Cr) and closed app store commissions (₹5,000 Cr). This represents commercial gross outlays, not net balance-of-payments capital drain.
+              </p>
+            </div>
+            <div class="hero-stat-badge">
+              <span class="badge-title">GROSS COMMERCIAL FLOW</span>
+              <span class="badge-desc">Advertising Capture + App Store Commission</span>
+            </div>
+          </div>
+
+          <!-- 5 Metric Cards Ledger Grid -->
+          <div class="metrics-ledger-grid">
+            
+            <!-- Metric A: Foreign Advertising Capture -->
+            <div class="metric-card metric-card-terracotta">
+              <div class="metric-head">
+                <span class="metric-symbol">A.</span>
+                <span class="metric-title">Foreign Ad Revenue Capture</span>
+              </div>
+              <div class="metric-primary-val text-terracotta" id="dispForeignRevenue">₹43,200 Cr</div>
+              <div class="metric-subline">
+                <span class="mono" id="dispForeignPct">72%</span> of total digital advertising outlay
+              </div>
+              <div class="metric-formula-tag">Ad Spend &times; Foreign Capture %</div>
+            </div>
+
+            <!-- Metric B: Domestic Advertising Retention -->
+            <div class="metric-card metric-card-olive">
+              <div class="metric-head">
+                <span class="metric-symbol">B.</span>
+                <span class="metric-title">Domestic Platform Retention</span>
+              </div>
+              <div class="metric-primary-val text-olive" id="dispDomesticRetention">₹10,800 Cr</div>
+              <div class="metric-subline">
+                <span class="mono" id="dispDomesticPct">18%</span> retained by Indian digital publishers
+              </div>
+              <div class="metric-formula-tag">Ad Spend &times; Domestic Retention %</div>
+            </div>
+
+            <!-- Metric C: Unallocated Ad Spend -->
+            <div class="metric-card">
+              <div class="metric-head">
+                <span class="metric-symbol">C.</span>
+                <span class="metric-title">Unallocated Ad Expenditure</span>
+              </div>
+              <div class="metric-primary-val" id="dispUnallocatedAmount">₹6,000 Cr</div>
+              <div class="metric-subline">
+                <span class="mono" id="dispUnallocatedPct">10%</span> intermediary &amp; programmatic tech share
+              </div>
+              <div class="metric-formula-tag">Total Ad Spend &minus; Foreign &minus; Domestic</div>
+            </div>
+
+            <!-- Metric D: App Store Commission -->
+            <div class="metric-card">
+              <div class="metric-head">
+                <span class="metric-symbol">D.</span>
+                <span class="metric-title">App Store Commission Outflow</span>
+              </div>
+              <div class="metric-primary-val" id="dispAppStoreOutflow">₹5,000 Cr</div>
+              <div class="metric-subline">
+                <span class="mono" id="dispAppStoreCommissionPct">20%</span> blended take-rate on ₹25,000 Cr GMV
+              </div>
+              <div class="metric-formula-tag">App Store GMV &times; Commission %</div>
+            </div>
+
+            <!-- Metric E: SME Foreign Leakage -->
+            <div class="metric-card">
+              <div class="metric-head">
+                <span class="metric-symbol">E.</span>
+                <span class="metric-title">SME Foreign Ad Outflow</span>
+              </div>
+              <div class="metric-primary-val text-terracotta" id="dispSMEOutflow">₹17,280 Cr</div>
+              <div class="metric-subline">
+                Extrapolated from <span class="mono" id="dispSMEAdSpend">₹24,000 Cr</span> SME ad spend
+              </div>
+              <div class="metric-formula-tag">SME Outlay &times; Foreign Capture %</div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ==============================================================
+             PANEL 2: Visual Economic Breakdown
+             ============================================================== -->
+        <section id="visual-breakdown" class="dashboard-panel">
+          <div class="panel-header-row">
+            <div>
+              <span class="panel-kicker">02 &bull; FLOW TOPOLOGY</span>
+              <h2 class="panel-heading">Visual Economic Breakdown</h2>
+            </div>
+            <span class="panel-badge">NATIVE VECTOR VISUALIZATIONS</span>
+          </div>
+          <p class="panel-intro">
+            Interactive structural representations showing how capital moves from commercial advertisers into foreign gatekeepers, domestic channels, and app ecosystems. Proportions dynamically adapt to parameter changes.
+          </p>
+
+          <!-- Visualization 1: Proportional Horizontal Distribution Bar -->
+          <div class="dashboard-subcard">
+            <div class="subcard-header">
+              <h3 class="subcard-title">1. Advertising Expenditure Capital Distribution Bar</h3>
+              <span class="subcard-note">Proportional division of total advertising capital</span>
+            </div>
+
+            <div class="breakdown-bar-shell" role="progressbar" aria-label="Proportional distribution of digital advertising spend">
+              <div id="barSegForeign" class="bar-seg bar-seg-foreign" style="width: 72%;"></div>
+              <div id="barSegDomestic" class="bar-seg bar-seg-domestic" style="width: 18%;"></div>
+              <div id="barSegUnallocated" class="bar-seg bar-seg-unallocated" style="width: 10%;"></div>
+            </div>
+
+            <div class="bar-legend-grid">
+              <div class="bar-legend-item">
+                <span class="legend-swatch swatch-terracotta"></span>
+                <div>
+                  <div class="legend-label">Foreign Platform Capture</div>
+                  <div class="legend-val mono" id="breakdownForeignVal">₹43,200 Cr (<span id="breakdownForeignPct">72%</span>)</div>
+                </div>
+              </div>
+              <div class="bar-legend-item">
+                <span class="legend-swatch swatch-olive"></span>
+                <div>
+                  <div class="legend-label">Domestic Platform Retention</div>
+                  <div class="legend-val mono" id="breakdownDomesticVal">₹10,800 Cr (<span id="breakdownDomesticPct">18%</span>)</div>
+                </div>
+              </div>
+              <div class="bar-legend-item">
+                <span class="legend-swatch swatch-sand"></span>
+                <div>
+                  <div class="legend-label">Unallocated / Intermediary Share</div>
+                  <div class="legend-val mono" id="breakdownUnallocatedVal">₹6,000 Cr (<span id="breakdownUnallocatedPct">10%</span>)</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2-Column Grid for Sankey Flow & App Store Breakdown -->
+          <div class="dashboard-duo-grid">
+            
+            <!-- Visualization 2: Native SVG Economic Flow Diagram -->
+            <div class="dashboard-subcard duo-span-full">
+              <div class="subcard-header">
+                <h3 class="subcard-title">2. Macroeconomic Capital Flow Vector Diagram</h3>
+                <span class="subcard-note">Sankey-style vector paths scaled to live values</span>
+              </div>
+              <div id="economicFlowSvg" class="flow-svg-container">
+                <!-- SVG dynamically injected by digital-economy-simulator.js -->
+              </div>
+            </div>
+
+            <!-- Visualization 3: App Store Commission vs Developer Split -->
+            <div class="dashboard-subcard duo-span-full">
+              <div class="subcard-header">
+                <h3 class="subcard-title">3. Mobile Operating System Commission &amp; Developer Proceeds</h3>
+                <span class="subcard-note">Partitioning of gross annual app marketplace GMV</span>
+              </div>
+
+              <div class="appstore-split-container">
+                <div class="appstore-metric-row">
+                  <div>
+                    <span class="stat-label">Total App Store GMV:</span>
+                    <strong class="stat-figure" id="appStoreGmvTotalVal">₹25,000 Cr</strong>
+                  </div>
+                  <div>
+                    <span class="stat-label">Commission Outflow:</span>
+                    <strong class="stat-figure text-terracotta" id="appStoreCommissionVal">₹5,000 Cr (20%)</strong>
+                  </div>
+                  <div>
+                    <span class="stat-label">Developer Proceeds:</span>
+                    <strong class="stat-figure text-olive" id="appStoreRemainingVal">₹20,000 Cr (80%)</strong>
+                  </div>
+                </div>
+
+                <div class="breakdown-bar-shell" role="progressbar" aria-label="App store commission split">
+                  <div id="appStoreCommissionBarSeg" class="bar-seg bar-seg-foreign" style="width: 20%;"></div>
+                  <div id="appStoreRemainingBarSeg" class="bar-seg bar-seg-domestic" style="width: 80%;"></div>
+                </div>
+
+                <div class="bar-legend-grid">
+                  <div class="bar-legend-item">
+                    <span class="legend-swatch swatch-terracotta"></span>
+                    <div class="legend-label">Platform Gatekeeper Commission (Take-Rate)</div>
+                  </div>
+                  <div class="bar-legend-item">
+                    <span class="legend-swatch swatch-olive"></span>
+                    <div class="legend-label">Remaining Indian Developer &amp; Publisher Proceeds</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ==============================================================
+             PANEL 3: Scenario Comparison
+             ============================================================== -->
+        <section id="scenario-comparison" class="dashboard-panel">
+          <div class="panel-header-row">
+            <div>
+              <span class="panel-kicker">03 &bull; STRATEGIC MODELS</span>
+              <h2 class="panel-heading">Scenario Comparison Matrix</h2>
+            </div>
+            <span class="panel-badge">ILLUSTRATIVE PATHWAYS</span>
+          </div>
+          <p class="panel-intro">
+            Compare three structural scenarios modeling different degrees of market concentration, sovereign protocol adoption, and app marketplace take-rates across India's digital ecosystem.
+          </p>
+
+          <!-- Scenario Comparison Layout (Table + SVG Chart Side-by-Side) -->
+          <div class="scenario-layout-grid">
+            
+            <!-- Comparison Table -->
+            <div class="table-scroll-hint">&larr; Swipe table to view all columns &rarr;</div>
+            <div class="table-responsive-container">
+              <table class="editorial-table">
+                <thead>
+                  <tr>
+                    <th>Scenario Archetype</th>
+                    <th>Foreign Capture</th>
+                    <th>Domestic Retention</th>
+                    <th>App Commission</th>
+                    <th>Gross Outflow</th>
+                  </tr>
+                </thead>
+                <tbody id="scenarioTableBody">
+                  <!-- Populated dynamically by digital-economy-simulator.js -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Grouped Bar Chart -->
+            <div class="scenario-chart-wrapper">
+              <div class="chart-header-tag">COMPARATIVE GROSS CAPITAL ALLOCATIONS (₹ Cr)</div>
+              <div id="scenarioComparisonChart" class="scenario-chart-container">
+                <!-- Grouped Bar SVG dynamically rendered by JS -->
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ==============================================================
+             PANEL 4: SME Impact Explorer
+             ============================================================== -->
+        <section id="sme-explorer" class="dashboard-panel">
+          <div class="panel-header-row">
+            <div>
+              <span class="panel-kicker">04 &bull; ENTERPRISE MICROECONOMICS</span>
+              <h2 class="panel-heading">SME Impact Explorer</h2>
+            </div>
+            <span class="panel-badge">FIRM-LEVEL SIMULATION</span>
+          </div>
+          <p class="panel-intro">
+            Examine how algorithmic ad concentration affects the balance sheet of individual Indian micro, small, and medium enterprises. Test hypothetical diversification into decentralized or domestic advertising channels.
+          </p>
+
+          <div class="sme-dashboard-grid">
+            
+            <!-- Left Card: SME Interactive Inputs -->
+            <div class="dashboard-subcard">
+              <h3 class="subcard-title">Enterprise Operating Assumptions</h3>
+              
+              <div class="sme-controls-list">
+                
+                <div class="sme-field-item">
+                  <div class="sme-field-head">
+                    <label for="smeMonthlySpendInput" class="sme-label">Monthly Digital Advertising Outlay</label>
+                    <div class="sidebar-num-wrap">
+                      <span class="num-prefix">₹</span>
+                      <input type="number" id="smeMonthlySpendInput" class="num-input sidebar-num-field" min="1000" max="5000000" step="5000" value="50000" aria-label="Monthly advertising expenditure in rupees">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="sme-field-item">
+                  <div class="sme-field-head">
+                    <label for="smeForeignShareSlider" class="sme-label">Share Directed to Foreign Networks</label>
+                    <div class="sidebar-num-wrap">
+                      <input type="number" id="smeForeignShareInput" class="num-input sidebar-num-field" min="0" max="100" step="5" value="85" aria-label="Share directed to foreign platforms">
+                      <span class="num-suffix">%</span>
+                    </div>
+                  </div>
+                  <input type="range" id="smeForeignShareSlider" class="sim-slider" min="0" max="100" step="5" value="85" aria-label="Slider for foreign share">
+                </div>
+
+                <div class="sme-field-item">
+                  <div class="sme-field-head">
+                    <label for="smeMonthlyRevenueInput" class="sme-label">Monthly Gross Business Revenue</label>
+                    <div class="sidebar-num-wrap">
+                      <span class="num-prefix">₹</span>
+                      <input type="number" id="smeMonthlyRevenueInput" class="num-input sidebar-num-field" min="10000" max="50000000" step="25000" value="500000" aria-label="Monthly gross business revenue in rupees">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="sme-field-item">
+                  <div class="sme-field-head">
+                    <label for="smeMonthlyFeesInput" class="sme-label">Monthly Platform Take-Rates &amp; Fees</label>
+                    <div class="sidebar-num-wrap">
+                      <span class="num-prefix">₹</span>
+                      <input type="number" id="smeMonthlyFeesInput" class="num-input sidebar-num-field" min="0" max="5000000" step="1000" value="15000" aria-label="Estimated monthly platform fees in rupees">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="sme-field-item">
+                  <div class="sme-field-head">
+                    <label for="smeHypoShareSlider" class="sme-label">Hypothetical Target Foreign Share</label>
+                    <div class="sidebar-num-wrap">
+                      <input type="number" id="smeHypoShareInput" class="num-input sidebar-num-field" min="0" max="100" step="5" value="40" aria-label="Hypothetical foreign platform share">
+                      <span class="num-suffix">%</span>
+                    </div>
+                  </div>
+                  <input type="range" id="smeHypoShareSlider" class="sim-slider" min="0" max="100" step="5" value="40" aria-label="Slider for hypothetical foreign share">
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Right Card: SME Computed Annual Balance Sheet Impact -->
+            <div class="dashboard-subcard">
+              <h3 class="subcard-title">Annualized Firm-Level Impact</h3>
+              
+              <div class="sme-metrics-stack">
+                
+                <div class="sme-calc-row">
+                  <span class="sme-calc-label">Annualized Advertising Outlay:</span>
+                  <span class="sme-calc-val mono" id="smeDispAnnualSpend">₹6,00,000</span>
+                </div>
+
+                <div class="sme-calc-row">
+                  <span class="sme-calc-label">Directed to Foreign Networks:</span>
+                  <span class="sme-calc-val mono text-terracotta" id="smeDispAnnualForeign">₹5,10,000</span>
+                </div>
+
+                <div class="sme-calc-row">
+                  <span class="sme-calc-label">Ad Intensity (% of Revenue):</span>
+                  <span class="sme-calc-val mono" id="smeDispSpendRatio">10.0%</span>
+                </div>
+
+                <div class="sme-calc-row">
+                  <span class="sme-calc-label">Annual Platform Intermediary Fees:</span>
+                  <span class="sme-calc-val mono" id="smeDispAnnualFees">₹1,80,000</span>
+                </div>
+
+                <!-- Highlight Box: Domestic Shift Savings Potential -->
+                <div class="sme-savings-highlight-box">
+                  <div class="savings-title">DOMESTIC SHIFT / RECIRCULATION POTENTIAL</div>
+                  <div class="savings-figure" id="smeDispRetainedSavings">₹2,70,000</div>
+                  <p class="savings-narrative" id="smeDispSavingsNarrative">
+                    By lowering foreign platform allocation from 85% to 40%, approximately ₹2,70,000 annually is redirected from foreign gatekeepers toward domestic media networks and domestic business margin.
+                  </p>
+                </div>
+
+                <div class="sme-disclaimer-note">
+                  * Advertising outlay contributes to customer discovery and sales velocity; it is not purely an operational loss.
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ==============================================================
+             PANEL 5: Sensitivity Analysis
+             ============================================================== -->
+        <section id="sensitivity-analysis" class="dashboard-panel">
+          <div class="panel-header-row">
+            <div>
+              <span class="panel-kicker">05 &bull; PARAMETRIC DYNAMICS</span>
+              <h2 class="panel-heading">Sensitivity Analysis</h2>
+            </div>
+            <span class="panel-badge">ELASTICITY MODEL</span>
+          </div>
+          <p class="panel-intro">
+            Evaluate how marginal adjustments in single macroeconomic variables alter aggregate gross capital outflows and domestic retention balances.
+          </p>
+
+          <!-- Sensitivity Parameter Tabs -->
+          <div class="sensitivity-tabs-bar">
+            <button class="btn-sens-tab active" data-variable="foreignCapture" type="button" id="sensTabCapture">
+              Foreign Platform Capture % (30% &rarr; 90%)
+            </button>
+            <button class="btn-sens-tab" data-variable="adSpend" type="button" id="sensTabSpend">
+              Total Digital Ad Spend (₹20,000 Cr &rarr; ₹1,20,000 Cr)
+            </button>
+            <button class="btn-sens-tab" data-variable="commission" type="button" id="sensTabComm">
+              App Store Commission Rate (5% &rarr; 30%)
+            </button>
+          </div>
+
+          <!-- Sensitivity Vector Curve & Step Table -->
+          <div class="sensitivity-grid-layout">
+            
+            <div class="dashboard-subcard">
+              <div class="subcard-header">
+                <h3 class="subcard-title">Parametric Outflow Curve</h3>
+                <span class="subcard-note">Mathematical response curve</span>
+              </div>
+              <div id="sensitivityChart" class="sensitivity-chart-container">
+                <!-- SVG Line Chart dynamically drawn by JS -->
+              </div>
+            </div>
+
+            <div class="dashboard-subcard">
+              <div class="subcard-header">
+                <h3 class="subcard-title">Tabular Sensitivity Data</h3>
+                <span class="subcard-note">Live numerical derivations</span>
+              </div>
+              <div class="table-scroll-hint">&larr; Swipe table to view all columns &rarr;</div>
+              <div class="table-responsive-container">
+                <table class="editorial-table sensitivity-table">
+                  <thead>
+                    <tr>
+                      <th>Assumption Step</th>
+                      <th>Foreign Ad Capture</th>
+                      <th>Domestic Retention</th>
+                      <th>Combined Outflow</th>
+                    </tr>
+                  </thead>
+                  <tbody id="sensitivityTableBody">
+                    <!-- Dynamic rows rendered by JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ==============================================================
+             PANEL 6: Methodology, Limitations & Authorship
+             ============================================================== -->
+        <section id="methodology-limitations" class="dashboard-panel">
+          <div class="panel-header-row">
+            <div>
+              <span class="panel-kicker">06 &bull; RESEARCH FRAMEWORK</span>
+              <h2 class="panel-heading">Methodology, Formulations &amp; Caveats</h2>
+            </div>
+            <span class="panel-badge">ACADEMIC METHODOLOGY</span>
+          </div>
+
+          <div class="methodology-content-grid">
+            
+            <div class="dashboard-subcard">
+              <h3 class="subcard-title">1. Mathematical Formulations</h3>
+              <div class="formula-code-box">
+                <div class="formula-row"><strong>Foreign Ad Capture:</strong> Ad Spend &times; (Foreign Capture % / 100)</div>
+                <div class="formula-row"><strong>Domestic Retention:</strong> Ad Spend &times; (Domestic Retention % / 100)</div>
+                <div class="formula-row"><strong>Unallocated Intermediary:</strong> Ad Spend &minus; Foreign Revenue &minus; Domestic Retention</div>
+                <div class="formula-row"><strong>App Store Outflow:</strong> App Store GMV &times; (Commission Rate % / 100)</div>
+                <div class="formula-row"><strong>Combined Gross Outflow:</strong> Foreign Ad Revenue + App Store Outflow</div>
+              </div>
+
+              <h3 class="subcard-title" style="margin-top: 1.5rem;">2. Core Research Caveats</h3>
+              <ul class="methodology-bullets">
+                <li><strong>Gross Commercial Flow &ne; Net Economic Drain:</strong> Modelled outflow reflects commercial transaction volume. Foreign tech platforms maintain Indian operating entities, contribute corporate and equalization levies, employ local engineering personnel, and provide commercial discovery utilities to domestic enterprises.</li>
+                <li><strong>Separation of Economic Streams:</strong> Digital advertising expenditure and app marketplace transaction volumes are modeled as distinct flows to avoid double-counting.</li>
+                <li><strong>Assumption-Driven Simulation:</strong> Results are parametric estimations designed to explore market structure scenarios, not audited balance-of-payments statistics.</li>
+              </ul>
+            </div>
+
+            <!-- Authorship Box -->
+            <div class="dashboard-subcard author-panel-card">
+              <span class="author-kicker">RESEARCH &amp; SIMULATION DESIGN</span>
+              <h3 class="author-name">Viraj Ravani</h3>
+              <p class="author-bio">
+                Researcher investigating digital market design, sovereign digital public infrastructure (DPI), open protocol architectures (ONDC, Beckn), and domestic capital retention mechanics in India's digital economy.
+              </p>
+              
+              <div class="author-action-links">
+                <a href="https://virajravani.in/algorithmic-dependency" class="author-link-btn" target="_blank" rel="noopener noreferrer">
+                  Read Original White Paper &nearr;
+                </a>
+                <a href="https://www.linkedin.com/in/virajravani" class="author-link-btn author-link-outline" target="_blank" rel="noopener noreferrer">
+                  LinkedIn Profile &nearr;
+                </a>
+                <a href="mailto:viraj.ravani@somaiya.edu" class="author-link-btn author-link-outline">
+                  viraj.ravani@somaiya.edu
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+  </div>
+
+  <!-- Vanilla JavaScript Simulation Engine -->
+  <script src="digital-economy-simulator.js"></script>
+</body>
+</html>
